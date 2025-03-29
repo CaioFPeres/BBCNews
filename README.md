@@ -13,5 +13,29 @@ In order for anyone to run this without any problems, the API key is included in
 But it is wide known that this is not the best way since anyone can publicly see it.
 Ideally, it should be at gradle.properties as a property, and retrieved at runtime using BuildConfig.
 
+## Clean Architecture Folder Structure
+
+📂 BBCNews
+├── MainActivity.kt
+├── 📂 ui (View Layer)
+│   ├── 📂 mainScreen
+│   │   ├── MainScreen.kt
+│   │   ├── MainScreenViewModel.kt
+│   │   ├── NewsUiState.kt
+
+├── 📂 domain (Business Logic Layer)
+│   ├── 📂 model
+│   │   ├── News.kt
+│   ├── 📂 repository
+│   │   ├── NewsRepository.kt
+
+├── 📂 data (Data Layer)
+│   ├── 📂 remote
+│   │   ├── NewsAPI.kt
+│   │   ├── RetrofitClient.kt
+│   ├── 📂 repository
+│   │   ├── NewsRepositoryImpl.kt
+
+
 ## Executing the project
 - Open on Android Studio and press Run.

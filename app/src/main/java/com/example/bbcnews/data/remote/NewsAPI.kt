@@ -1,4 +1,5 @@
-package com.example.bbcnews.model
+package com.example.bbcnews.data.remote
+import com.example.bbcnews.domain.model.News
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -12,6 +13,8 @@ import retrofit2.http.Query
 // getNews parameter should have: @Query("apiKey") apiKey: String = BuildConfig.API_KEY
 interface NewsAPI {
     @GET("top-headlines?sources=bbc-news")
-    fun getNews(@Header("User-Agent") userAgent: String = "Mozilla/5.0",
-                @Query("apiKey") apiKey: String = "5c1eb62ede6e4dbc88e217456d6f78cd"): Call<News?>?
+    fun getNews(
+        @Header("User-Agent") userAgent: String = "Mozilla/5.0", // needed for this API
+        @Query("apiKey") apiKey: String = "5c1eb62ede6e4dbc88e217456d6f78cd"
+    ): Call<News?>?
 }

@@ -1,4 +1,4 @@
-package com.example.bbcnews.model
+package com.example.bbcnews.domain.model
 
 data class News (
     var status: String,
