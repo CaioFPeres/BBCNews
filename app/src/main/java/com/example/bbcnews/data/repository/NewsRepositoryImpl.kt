@@ -1,17 +1,20 @@
-package com.example.bbcnews.model
+package com.example.bbcnews.data.repository
 
-import RetrofitClient
+import com.example.bbcnews.data.remote.NewsAPI
+import com.example.bbcnews.data.remote.RetrofitClient
+import com.example.bbcnews.domain.model.News
+import com.example.bbcnews.domain.repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class NewsRepository {
+class NewsRepositoryImpl: NewsRepository {
     private var apiService: NewsAPI = RetrofitClient()
         .create("https://newsapi.org/v2/", NewsAPI::class.java)
 
-    suspend fun getNewsData(): News = withContext(Dispatchers.IO) {
+    override suspend fun getNewsData(): News = withContext(Dispatchers.IO) {
         suspendCoroutine { continuation ->
             val call = apiService.getNews()
 

@@ -1,8 +1,11 @@
-package com.example.bbcnews.mainScreen
+package com.example.bbcnews.ui.mainScreen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -14,12 +17,15 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.bbcnews.model.NewsUiState
-import com.example.bbcnews.model.NewsViewModel
+import androidx.compose.ui.layout.ContentScale
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import coil.compose.AsyncImage
+import com.example.bbcnews.domain.model.News
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(viewModel: NewsViewModel) {
+fun MainScreen(navController: NavHostController, viewModel: MainScreenViewModel) {
     val uiState by viewModel.uiState.collectAsState()
 
     Scaffold(
@@ -53,13 +59,43 @@ fun MainScreen(viewModel: NewsViewModel) {
 
                     is NewsUiState.Success -> {
                         val news = (uiState as NewsUiState.Success).news
-                        Text(text = news.toString())
+                        NewsList(news, navController)
                     }
 
                     is NewsUiState.Error -> {
                         Text(text = "Error: ${(uiState as NewsUiState.Error).message}")
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun NewsList(news: News, navController: NavController) {
+    for (i in 0..< news.articles.size) {
+        Card(
+            modifier = Modifier
+                .height(100.dp)
+                .padding(bottom = 7.dp),
+            shape = RoundedCornerShape(20.dp),
+            onClick = { navController.navigate("NewsScreen") }
+        ) {
+            Row {
+                Column(modifier = Modifier.width(100.dp)) {
+                    AsyncImage(
+                        model = news.articles[i].urlToImage,
+                        contentDescription = null,
+                        modifier = Modifier.fillMaxHeight(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                Text(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(10.dp),
+                    text = news.articles[i].title
+                )
             }
         }
     }

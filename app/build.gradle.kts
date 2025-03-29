@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.bbcnews"
-        minSdk = 25
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -42,12 +42,21 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+    sourceSets {
+        getByName("main") {
+            java {
+                srcDirs("src\\main\\java", "src\\main\\java\\com\\example\\bbcnews\\domain")
+            }
+        }
+    }
     buildFeatures {
         compose = true
     }
 }
 
 dependencies {
+    implementation(libs.navigator)
+    implementation(libs.coil)
     implementation(libs.retrofit2)
     implementation(libs.retrofit2.gson)
     implementation(libs.androidx.core.ktx)
