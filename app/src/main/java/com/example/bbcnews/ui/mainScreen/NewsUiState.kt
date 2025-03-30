@@ -1,6 +1,6 @@
 package com.example.bbcnews.ui.mainScreen
 
-import com.example.bbcnews.domain.model.News
+import model.News
 
 sealed class NewsUiState {
     data object Loading : NewsUiState()

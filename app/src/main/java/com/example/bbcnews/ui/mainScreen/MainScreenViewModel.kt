@@ -1,19 +1,17 @@
 package com.example.bbcnews.ui.mainScreen
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bbcnews.data.repository.NewsRepositoryImpl
-import com.example.bbcnews.domain.model.News
-import com.example.bbcnews.domain.usecase.GetDateSortedNewsUseCase
+import usecase.GetDateSortedNewsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.time.Instant
-import java.time.format.DateTimeFormatter
-import java.util.Date
 
-class MainScreenViewModel(private val repository: NewsRepositoryImpl) : ViewModel() {
+class MainScreenViewModel(
+    private val repository: NewsRepositoryImpl
+) : ViewModel() {
+
     private val _uiState = MutableStateFlow<NewsUiState>(NewsUiState.Loading)
     val uiState: StateFlow<NewsUiState> = _uiState
 

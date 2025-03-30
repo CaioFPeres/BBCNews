@@ -1,13 +1,13 @@
-package com.example.bbcnews.domain.model
+package model
 
 data class News (
     var status: String,
     var totalResults: Int,
 
-    var articles: List<Articles>
+    var articles: List<Article>
 )
 
-data class Articles (
+data class Article (
     var source: Source,
 
     var author: String,

@@ -4,8 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -13,6 +11,7 @@ import com.example.bbcnews.ui.mainScreen.MainScreen
 import com.example.bbcnews.data.repository.NewsRepositoryImpl
 import com.example.bbcnews.ui.mainScreen.MainScreenViewModel
 import com.example.bbcnews.ui.newsScreen.NewsScreen
+import com.example.bbcnews.ui.newsScreen.NewsScreenViewModel
 import com.example.bbcnews.ui.theme.BBCNewsTheme
 
 class MainActivity : ComponentActivity() {
@@ -20,7 +19,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         val repository = NewsRepositoryImpl()
-        val viewModel = MainScreenViewModel(repository)
+        val newsScreenViewModel = NewsScreenViewModel()
+        val mainScreenViewModel = MainScreenViewModel(repository)
 
         enableEdgeToEdge()
         setContent {
@@ -28,10 +28,10 @@ class MainActivity : ComponentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "MainScreen") {
                     composable("MainScreen") {
-                        MainScreen(navController, viewModel)
+                        MainScreen(navController, mainScreenViewModel, newsScreenViewModel)
                     }
                     composable(route = "NewsScreen") {
-                        NewsScreen(navController, viewModel)
+                        NewsScreen(navController, newsScreenViewModel)
                     }
                 }
             }

@@ -2,8 +2,8 @@ package com.example.bbcnews.data.repository
 
 import com.example.bbcnews.data.remote.NewsAPI
 import com.example.bbcnews.data.remote.RetrofitClient
-import com.example.bbcnews.domain.model.News
-import com.example.bbcnews.domain.repository.NewsRepository
+import model.News
+import repository.NewsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.resume

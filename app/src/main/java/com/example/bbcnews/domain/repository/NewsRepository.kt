@@ -1,6 +1,6 @@
-package com.example.bbcnews.domain.repository
+package repository
 
-import com.example.bbcnews.domain.model.News
+import model.News
 
 interface NewsRepository {
     suspend fun getNewsData(): News
