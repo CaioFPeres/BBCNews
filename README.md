@@ -15,6 +15,7 @@ Ideally, it should be at gradle.properties as a property, and retrieved at runti
 
 ## Clean Architecture Folder Structure
 
+``` bash
 📂 BBCNews
 ├── MainActivity.kt
 ├── 📂 ui (View Layer)
@@ -35,7 +36,7 @@ Ideally, it should be at gradle.properties as a property, and retrieved at runti
 │   │   ├── RetrofitClient.kt
 │   ├── 📂 repository
 │   │   ├── NewsRepositoryImpl.kt
-
+```
 
 ## Executing the project
 - Open on Android Studio and press Run.

@@ -12,7 +12,7 @@ import retrofit2.http.Query
 // But I'm doing this way otherwise it would not run seemlessly (with one click).
 // getNews parameter should have: @Query("apiKey") apiKey: String = BuildConfig.API_KEY
 interface NewsAPI {
-    @GET("top-headlines?sources=bbc-news")
+    @GET("top-headlines?")
     fun getNews(
         @Header("User-Agent") userAgent: String = "Mozilla/5.0", // needed for this API
         @Query("apiKey") apiKey: String = "5c1eb62ede6e4dbc88e217456d6f78cd"

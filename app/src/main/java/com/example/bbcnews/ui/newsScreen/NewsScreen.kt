@@ -9,14 +9,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -25,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
@@ -32,16 +36,28 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import androidx.core.net.toUri
+import com.example.bbcnews.R
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreen(navController: NavHostController, viewModel: NewsScreenViewModel) {
     val uiState by viewModel.uiState.collectAsState()
     val config = LocalConfiguration.current
     val context = LocalContext.current
-    var width = if( config.screenWidthDp < config.screenHeightDp) config.screenWidthDp else config.screenHeightDp
+    var width = if( config.screenWidthDp < config.screenHeightDp)
+                    config.screenWidthDp
+                else
+                    config.screenHeightDp
 
-
-    Scaffold() { paddingValues ->
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                modifier = Modifier.height(30.dp),
+                title = {
+                }
+            )
+        }
+    ) { paddingValues ->
         Row(
             modifier = Modifier
                 .verticalScroll(rememberScrollState())
@@ -69,6 +85,8 @@ fun NewsScreen(navController: NavHostController, viewModel: NewsScreenViewModel)
                                       else
                                           15.dp
                             ) ,
+                        fallback = painterResource(id = R.drawable.unavailable),
+                        error = painterResource(id = R.drawable.unavailable)
                     )
                 }
 
@@ -81,14 +99,20 @@ fun NewsScreen(navController: NavHostController, viewModel: NewsScreenViewModel)
                 ) {
                     Column() {
                         Text(
-                            text = uiState!!.title,
-                            fontSize = 22.sp
+                            fontSize = 22.sp,
+                            text = if(uiState!!.title.length > 0)
+                                        uiState!!.title
+                                   else
+                                        "Title not available."
                         )
 
                         Spacer(modifier = Modifier.padding(top = 12.dp))
 
                         Text(
-                            text = uiState!!.description,
+                            text = if(uiState!!.description.length > 0)
+                                        uiState!!.description
+                                   else
+                                        "Description not available.",
                             fontSize = 10.sp,
                             color = Color.White,
                             textAlign = TextAlign.End
@@ -105,7 +129,10 @@ fun NewsScreen(navController: NavHostController, viewModel: NewsScreenViewModel)
                         )
 
                         Text(
-                            text = uiState!!.content,
+                            text = if(uiState!!.content.length > 0)
+                                       uiState!!.content
+                                   else
+                                       "Content not available.",
                             fontSize = 14.sp,
                             color = Color.White,
                             textAlign = TextAlign.Start
