@@ -23,7 +23,7 @@ class NewsRepositoryImpl: NewsRepository {
                     if (response.isSuccessful) {
                         continuation.resume(response.body()!!)
                     } else {
-                        continuation.resumeWithException(Exception("API error: ${response.code()}"))
+                        continuation.resumeWithException(Exception("API error: ${response.code()}")) //Won't crash on error
                     }
                 }
 
