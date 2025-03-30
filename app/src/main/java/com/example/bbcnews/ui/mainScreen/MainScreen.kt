@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -21,12 +20,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.bbcnews.domain.model.News
+import com.example.bbcnews.ui.newsScreen.NewsScreenViewModel
+import model.News
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavHostController, viewModel: MainScreenViewModel) {
-    val uiState by viewModel.uiState.collectAsState()
+fun MainScreen(navController: NavHostController, mainScreenViewModel: MainScreenViewModel, newsScreenViewModel: NewsScreenViewModel) {
+    val uiState by mainScreenViewModel.uiState.collectAsState()
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -53,18 +53,14 @@ fun MainScreen(navController: NavHostController, viewModel: MainScreenViewModel)
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 when (uiState) {
-                    is NewsUiState.Loading -> {
-                        CircularProgressIndicator()
-                    }
+                    is NewsUiState.Loading -> CircularProgressIndicator()
 
                     is NewsUiState.Success -> {
                         val news = (uiState as NewsUiState.Success).news
-                        NewsList(news, navController)
+                        NewsList(news, navController, newsScreenViewModel)
                     }
 
-                    is NewsUiState.Error -> {
-                        Text(text = "Error: ${(uiState as NewsUiState.Error).message}")
-                    }
+                    is NewsUiState.Error -> Text(text = "Error: ${(uiState as NewsUiState.Error).message}")
                 }
             }
         }
@@ -72,14 +68,14 @@ fun MainScreen(navController: NavHostController, viewModel: MainScreenViewModel)
 }
 
 @Composable
-fun NewsList(news: News, navController: NavController) {
+fun NewsList(news: News, navController: NavController, newsScreenViewModel: NewsScreenViewModel) {
     for (i in 0..< news.articles.size) {
         Card(
             modifier = Modifier
                 .height(100.dp)
                 .padding(bottom = 7.dp),
             shape = RoundedCornerShape(20.dp),
-            onClick = { navController.navigate("NewsScreen") }
+            onClick = { newsScreenViewModel.assignArticle(news.articles[i]); navController.navigate("NewsScreen") }
         ) {
             Row {
                 Column(modifier = Modifier.width(100.dp)) {

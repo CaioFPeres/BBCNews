@@ -1,12 +1,12 @@
 package com.example.bbcnews.data.remote
-import com.example.bbcnews.domain.model.News
+import model.News
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
 // This is using the apiKey directly into the project code,
-// but this shouldn't be used in a development environment
+// which shouldn't be used in a development environment,
 // specially when upload the code to a public repository.
 // Instead, one should use BuildConfig by setting a API variable at gradle.properties.
 // But I'm doing this way otherwise it would not run seemlessly (with one click).
