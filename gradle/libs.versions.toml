@@ -5,6 +5,7 @@ coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
+kotlinxCoroutinesTest = "1.8.0"
 lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.09.00"
@@ -15,6 +16,7 @@ nav = "2.8.9"
 biometricKtx = "1.2.0-alpha05"
 
 [libraries]
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesTest" }
 navigator = { module = "androidx.navigation:navigation-compose", version.ref = "nav"}
 coil = { module = "io.coil-kt:coil-compose", version.ref = "coil"}
 retrofit2 = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit2" }
@@ -35,6 +37,9 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
 androidx-biometric-ktx = { group = "androidx.biometric", name = "biometric", version.ref = "biometricKtx" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version = "3.4.0" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version = "3.4.0" }
+koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose", version = "3.4.0" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
