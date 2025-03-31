@@ -17,7 +17,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
@@ -25,10 +27,15 @@ import com.example.bbcnews.R
 import com.example.bbcnews.ui.newsScreen.NewsScreenViewModel
 import com.example.bbcnews.ui.newsScreen.NewsUiState
 import model.News
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreen(navController: NavHostController, mainScreenViewModel: MainScreenViewModel, newsScreenViewModel: NewsScreenViewModel) {
+fun MainScreen(navController: NavHostController) {
+    val newsScreenViewModel: NewsScreenViewModel = koinViewModel(
+        viewModelStoreOwner = LocalContext.current as FragmentActivity
+    )
+    val mainScreenViewModel: MainScreenViewModel = koinViewModel()
     val uiState by mainScreenViewModel.uiState.collectAsState()
 
     Scaffold(

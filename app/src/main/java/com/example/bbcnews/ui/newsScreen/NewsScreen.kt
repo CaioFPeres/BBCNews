@@ -2,6 +2,7 @@ package com.example.bbcnews.ui.newsScreen
 
 import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,15 +34,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import androidx.core.net.toUri
+import androidx.fragment.app.FragmentActivity
 import com.example.bbcnews.R
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun NewsScreen(navController: NavHostController, viewModel: NewsScreenViewModel) {
-    val uiState by viewModel.uiState.collectAsState()
+fun NewsScreen() {
+    val newsScreenViewModel: NewsScreenViewModel = koinViewModel(
+        viewModelStoreOwner = LocalContext.current as FragmentActivity
+    )
+    val uiState by newsScreenViewModel.uiState.collectAsState()
     val config = LocalConfiguration.current
     val context = LocalContext.current
     var width = if( config.screenWidthDp < config.screenHeightDp)
@@ -49,6 +54,7 @@ fun NewsScreen(navController: NavHostController, viewModel: NewsScreenViewModel)
                 else
                     config.screenHeightDp
 
+    Log.d("DEBUG", uiState!!.url)
     Scaffold(
         topBar = {
             TopAppBar(
