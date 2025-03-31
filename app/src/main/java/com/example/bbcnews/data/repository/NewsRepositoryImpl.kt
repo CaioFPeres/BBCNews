@@ -10,13 +10,14 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
 
-class NewsRepositoryImpl: NewsRepository {
-    private var apiService: NewsAPI = RetrofitClient()
-        .create("https://newsapi.org/v2/", NewsAPI::class.java)
+class NewsRepositoryImpl(
+    private val retrofitClient: RetrofitClient
+) : NewsRepository {
+    private val newsApi = retrofitClient.create(NewsAPI::class.java)
 
     override suspend fun getNewsData(): News = withContext(Dispatchers.IO) {
         suspendCoroutine { continuation ->
-            val call = apiService.getNews()
+            val call = newsApi.getNews()
 
             call?.enqueue(object : retrofit2.Callback<News?> {
                 override fun onResponse(call: retrofit2.Call<News?>, response: retrofit2.Response<News?>) {
