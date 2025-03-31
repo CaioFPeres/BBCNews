@@ -1,4 +1,4 @@
-package com.example.bbcnews.ui.mainScreen
+package com.example.bbcnews.ui.newsScreen
 
 import model.News
 
