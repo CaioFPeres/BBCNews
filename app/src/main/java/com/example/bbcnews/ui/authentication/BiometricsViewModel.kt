@@ -17,6 +17,14 @@ class BiometricsViewModel(
             _authState.value = BiometricsState.NotAvailable
     }
 
+    fun launchBiometricPrompt() {
+        if(authState.value != BiometricsState.Success)
+            authenticateUseCase.showBiometricPrompt(
+                onSuccess = { onAuthenticationResult(true) },
+                onError = { error -> onAuthenticationResult(false, error) }
+            )
+    }
+
     fun onAuthenticationResult(success: Boolean, errorMessage: String? = null) {
         _authState.value = if (success) BiometricsState.Success
         else BiometricsState.Error(errorMessage ?: "Unknown error")
