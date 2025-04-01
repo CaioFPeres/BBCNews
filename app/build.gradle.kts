@@ -22,6 +22,14 @@ android {
         buildConfig = true
     }
 
+    packagingOptions {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -55,6 +63,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.mockk)
     implementation(libs.navigator)
     implementation(libs.coil)
     implementation(libs.retrofit2)
@@ -72,12 +81,15 @@ dependencies {
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
+    implementation(libs.androidx.ui.test.junit4.android)
+    implementation(libs.androidx.navigation.testing)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
+//    androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    testImplementation(kotlin("test"))
 }

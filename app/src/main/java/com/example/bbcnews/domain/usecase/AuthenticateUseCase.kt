@@ -6,18 +6,20 @@ import androidx.biometric.BiometricPrompt
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 
-class AuthenticateUseCase(private val context: Context?) {
+class AuthenticateUseCase(private val context: Context) {
+
     fun isBiometricAvailable(): Boolean {
-        val biometricManager = BiometricManager.from(context!!)
+        val biometricManager = BiometricManager.from(context)
         return biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG) ==
                 BiometricManager.BIOMETRIC_SUCCESS
     }
 
+    // Can't test this, couldn't mock executors
     fun showBiometricPrompt(
         onSuccess: () -> Unit,
         onError: (String) -> Unit
     ) {
-        val executor = ContextCompat.getMainExecutor(context!!)
+        val executor = ContextCompat.getMainExecutor(context)
         val biometricPrompt = BiometricPrompt(context as FragmentActivity, executor,
             object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {

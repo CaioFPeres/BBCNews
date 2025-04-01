@@ -15,7 +15,7 @@ val appModule = module {
     single { RetrofitClient("https://newsapi.org/v2/") }
     single { NewsRepositoryImpl(get()) }
     single { (activity: FragmentActivity) -> AuthenticateUseCase(activity) }
-    viewModel { MainScreenViewModel(get()) }
     viewModel { NewsScreenViewModel() }
+    viewModel { MainScreenViewModel(get()) }
     viewModel { BiometricsViewModel(get { parametersOf(get<FragmentActivity>()) }) }
 }

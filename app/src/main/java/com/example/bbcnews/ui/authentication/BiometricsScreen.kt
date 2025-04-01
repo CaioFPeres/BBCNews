@@ -8,13 +8,19 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bbcnews.ui.authentication.BiometricsState
 import com.example.bbcnews.ui.authentication.BiometricsViewModel
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
+// Could not mock everything to test this composable
 @Composable
-fun BiometricScreen(navController: NavHostController, biometricsViewModel: BiometricsViewModel) {
+fun BiometricScreen(navController: NavHostController) {
+    val context = LocalContext.current
+    val biometricsViewModel: BiometricsViewModel = koinViewModel { parametersOf(context) }
     val authState by biometricsViewModel.authState.collectAsState()
 
     biometricsViewModel.launchBiometricPrompt()
