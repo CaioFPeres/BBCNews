@@ -1,4 +1,5 @@
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +14,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.bbcnews.ui.authentication.BiometricsState
 import com.example.bbcnews.ui.authentication.BiometricsViewModel
+import com.example.bbcnews.ui.theme.DarkColorScheme
+import com.example.bbcnews.ui.theme.LightColorScheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -40,7 +43,14 @@ fun BiometricScreen(navController: NavHostController) {
 @Composable
 fun IdleScreen(){
     Column(
-        modifier = Modifier.fillMaxSize().background(color = Color.Black),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                color = if(isSystemInDarkTheme())
+                            LightColorScheme.primary
+                        else
+                            DarkColorScheme.primary,
+            ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -51,7 +61,14 @@ fun IdleScreen(){
 @Composable
 fun ErrorCard(msg: String){
     Column(
-        modifier = Modifier.fillMaxSize().background(color = Color.Black),
+        modifier = Modifier
+            .fillMaxSize()
+            .background(
+                color = if(isSystemInDarkTheme())
+                            LightColorScheme.primary
+                        else
+                            DarkColorScheme.primary,
+            ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {

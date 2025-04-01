@@ -1,4 +1,3 @@
-import com.example.bbcnews.data.remote.NewsAPI
 import com.example.bbcnews.data.remote.RetrofitClient
 import com.example.bbcnews.data.repository.NewsRepositoryImpl
 import com.example.bbcnews.ui.mainScreen.MainScreenViewModel
