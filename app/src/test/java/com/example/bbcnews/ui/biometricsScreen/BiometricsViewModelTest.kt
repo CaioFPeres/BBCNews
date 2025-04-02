@@ -1,4 +1,4 @@
-package com.example.bbcnews.ui.authentication
+package com.example.bbcnews.ui.biometricsScreen
 
 import io.mockk.every
 import io.mockk.mockk

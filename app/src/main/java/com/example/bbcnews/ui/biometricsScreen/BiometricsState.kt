@@ -1,4 +1,4 @@
-package com.example.bbcnews.ui.authentication
+package com.example.bbcnews.ui.biometricsScreen
 
 sealed class BiometricsState {
     object Idle : BiometricsState()  // Initial state, waiting for user action

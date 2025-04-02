@@ -1,6 +1,6 @@
 package com.example.bbcnews
 
-import BiometricScreen
+import BiometricsScreen
 import android.os.Build
 import android.os.Bundle
 import android.view.Window
@@ -34,7 +34,7 @@ class MainActivity : FragmentActivity() {
                 val navController = rememberNavController()
                 NavHost(navController = navController, startDestination = "BiometricsAuth") {
                     composable("BiometricsAuth") {
-                        BiometricScreen(navController)
+                        BiometricsScreen(navController)
                     }
                     composable("MainScreen") {
                         MainScreen(navController)

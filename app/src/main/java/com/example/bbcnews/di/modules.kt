@@ -1,7 +1,7 @@
 package com.example.bbcnews.di
 
 import com.example.bbcnews.data.repository.NewsRepositoryImpl
-import com.example.bbcnews.ui.authentication.BiometricsViewModel
+import com.example.bbcnews.ui.biometricsScreen.BiometricsViewModel
 import com.example.bbcnews.ui.mainScreen.MainScreenViewModel
 import com.example.bbcnews.ui.newsScreen.NewsScreenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
