@@ -74,7 +74,9 @@ fun NewsScreen(navController: NavHostController) {
         topBar = {
             TopAppBar(
                 modifier = Modifier
-                    .height(80.dp),
+                    .height(
+                        if(config.orientation != ORIENTATION_LANDSCAPE) 70.dp else 60.dp
+                    ),
                 title = {
                     IconButton(
                         onClick = { navController.popBackStack() },
