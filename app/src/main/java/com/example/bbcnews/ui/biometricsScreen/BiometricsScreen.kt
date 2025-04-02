@@ -18,7 +18,7 @@ import com.example.bbcnews.ui.theme.LightColorScheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-// Could not mock everything to test this composable
+
 @Composable
 fun BiometricsScreen(navController: NavHostController) {
     val context = LocalContext.current
