@@ -8,12 +8,11 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.bbcnews.ui.authentication.BiometricsState
-import com.example.bbcnews.ui.authentication.BiometricsViewModel
+import com.example.bbcnews.ui.biometricsScreen.BiometricsState
+import com.example.bbcnews.ui.biometricsScreen.BiometricsViewModel
 import com.example.bbcnews.ui.theme.DarkColorScheme
 import com.example.bbcnews.ui.theme.LightColorScheme
 import org.koin.androidx.compose.koinViewModel
@@ -21,7 +20,7 @@ import org.koin.core.parameter.parametersOf
 
 // Could not mock everything to test this composable
 @Composable
-fun BiometricScreen(navController: NavHostController) {
+fun BiometricsScreen(navController: NavHostController) {
     val context = LocalContext.current
     val biometricsViewModel: BiometricsViewModel = koinViewModel { parametersOf(context) }
     val authState by biometricsViewModel.authState.collectAsState()
@@ -67,14 +66,13 @@ fun ErrorCard(msg: String){
                 color = if(isSystemInDarkTheme())
                             LightColorScheme.primary
                         else
-                            DarkColorScheme.primary,
+                            DarkColorScheme.primary
             ),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Card(
-            modifier = Modifier
-                .padding(10.dp)
+            modifier = Modifier.padding(10.dp)
         ) {
             Text(
                 modifier = Modifier.padding(10.dp),
