@@ -17,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.fragment.app.FragmentActivity
@@ -79,10 +80,17 @@ fun MainScreen(navController: NavHostController) {
 
 @Composable
 fun NewsList(news: News, navController: NavController, newsScreenViewModel: NewsScreenViewModel) {
+    val config = LocalConfiguration.current
+    var cardWidth = if( config.screenWidthDp < config.screenHeightDp)
+                    config.screenWidthDp
+                else
+                    (config.screenWidthDp*0.6).toInt()
+
     for (i in 0..< news.articles.size) {
         Card(
             modifier = Modifier
                 .height(100.dp)
+                .requiredWidth(cardWidth.dp)
                 .padding(bottom = 7.dp),
             shape = RoundedCornerShape(20.dp),
             onClick = { newsScreenViewModel.assignArticle(news.articles[i]); navController.navigate("NewsScreen") }
