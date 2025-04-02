@@ -7,15 +7,15 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
-import usecase.GetDateSortedNewsUseCase
+import usecase.GetDateSortedUseCase
 import java.time.format.DateTimeParseException
 
-class GetDateSortedNewsUseCaseTest {
-    private lateinit var getDateSortedNewsUseCase: GetDateSortedNewsUseCase
+class GetDateSortedUseCaseTest {
+    private lateinit var getDateSortedNewsUseCase: GetDateSortedUseCase
 
     @Before
     fun setUp() {
-        getDateSortedNewsUseCase = GetDateSortedNewsUseCase()
+        getDateSortedNewsUseCase = GetDateSortedUseCase()
     }
 
     @Test
@@ -50,9 +50,9 @@ class GetDateSortedNewsUseCaseTest {
 
         val sortedArticles = getDateSortedNewsUseCase(articles)
 
-        assertEquals("2024-03-27T12:00:00Z", sortedArticles[0].publishedAt)
+        assertEquals("2024-03-27T18:00:00Z", sortedArticles[0].publishedAt)
         assertEquals("2024-03-27T15:00:00Z", sortedArticles[1].publishedAt)
-        assertEquals("2024-03-27T18:00:00Z", sortedArticles[2].publishedAt)
+        assertEquals("2024-03-27T12:00:00Z", sortedArticles[2].publishedAt)
     }
 
     private fun createArticle(date: String): Article {

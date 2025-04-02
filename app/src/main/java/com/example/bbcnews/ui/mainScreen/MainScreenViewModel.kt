@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bbcnews.data.repository.NewsRepositoryImpl
 import com.example.bbcnews.ui.newsScreen.NewsUiState
-import usecase.GetDateSortedNewsUseCase
+import usecase.GetDateSortedUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
@@ -25,7 +25,7 @@ class MainScreenViewModel(
             try {
                 _uiState.value = NewsUiState.Loading
                 val news = repository.getNewsData()
-                news.articles = GetDateSortedNewsUseCase()(news.articles)
+                news.articles = GetDateSortedUseCase()(news.articles)
                 _uiState.value = NewsUiState.Success(news)
             } catch (e: Exception) {
                 _uiState.value = NewsUiState.Error(e.message ?: "Unknown error occurred")
