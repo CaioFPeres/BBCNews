@@ -54,6 +54,7 @@ Ideally, it should be at gradle.properties as a property, and retrieved at runti
 ```
 
 ## Unit Tests
+- For some reason, MainScreenViewModelTest is not running with the rest of the tests. Need to run individually.
 - Some functions could not be tested due to their nature.
 
 ## Executing the project
