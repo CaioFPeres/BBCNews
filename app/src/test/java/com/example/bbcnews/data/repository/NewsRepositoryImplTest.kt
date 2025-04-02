@@ -2,6 +2,7 @@ package com.example.bbcnews.data.repository
 
 import com.example.bbcnews.data.remote.NewsAPI
 import com.example.bbcnews.data.remote.RetrofitClient
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -29,6 +30,7 @@ class NewsRepositoryImplTest {
         assert(Response.success(news).isSuccessful)
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     @Test(expected = Exception::class)
     fun `getNewsData should throw exception when api call fails`(): Unit = runBlocking {
         val _url = url + "~"

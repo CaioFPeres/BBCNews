@@ -60,8 +60,8 @@ class MainScreenViewModelTest {
             if(Instant.from(
                     DateTimeFormatter.ISO_DATE_TIME.parse(
                         news.articles[i].publishedAt)
-                    ).toEpochMilli() > last
-                ){
+                ).toEpochMilli() > last
+            ){
                 descending = false
                 break
             }
