@@ -108,7 +108,7 @@ fun NewsScreen(navController: NavHostController) {
                 .width(cardWidth.dp),
                 colors = CardDefaults.cardColors(
                     containerColor = if(isSystemInDarkTheme())
-                                        MaterialTheme.colorScheme.primaryContainer
+                                        MaterialTheme.colorScheme.surfaceVariant
                                     else
                                         Color(red = 180, green = 180, blue = 189, alpha = 255)
                 )

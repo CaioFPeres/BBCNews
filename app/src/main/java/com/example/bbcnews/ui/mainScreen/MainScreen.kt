@@ -98,7 +98,7 @@ fun NewsList(news: News, navController: NavController, newsScreenViewModel: News
                 .padding(bottom = 7.dp),
             colors = CardDefaults.cardColors(
                 containerColor = if(isSystemInDarkTheme())
-                    MaterialTheme.colorScheme.primaryContainer
+                    MaterialTheme.colorScheme.surfaceVariant
                 else
                     Color(red = 180, green = 180, blue = 189, alpha = 255)
             ),
