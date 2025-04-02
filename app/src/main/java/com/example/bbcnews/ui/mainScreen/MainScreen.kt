@@ -1,12 +1,15 @@
 package com.example.bbcnews.ui.mainScreen
 
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -15,6 +18,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
@@ -92,6 +96,12 @@ fun NewsList(news: News, navController: NavController, newsScreenViewModel: News
                 .height(100.dp)
                 .requiredWidth(cardWidth.dp)
                 .padding(bottom = 7.dp),
+            colors = CardDefaults.cardColors(
+                containerColor = if(isSystemInDarkTheme())
+                    MaterialTheme.colorScheme.primaryContainer
+                else
+                    Color(red = 180, green = 180, blue = 189, alpha = 255)
+            ),
             shape = RoundedCornerShape(20.dp),
             onClick = { newsScreenViewModel.assignArticle(news.articles[i]); navController.navigate("NewsScreen") }
         ) {
