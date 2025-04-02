@@ -2,7 +2,7 @@ package com.example.bbcnews.ui.newsScreen
 
 import android.content.Intent
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
-import android.util.Log
+import androidx.compose.material3.CardDefaults
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
@@ -13,18 +13,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -106,7 +105,13 @@ fun NewsScreen(navController: NavHostController) {
                     end = 10.dp,
                     bottom = 10.dp
                 )
-                .width(cardWidth.dp)
+                .width(cardWidth.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = if(isSystemInDarkTheme())
+                                        MaterialTheme.colorScheme.primaryContainer
+                                    else
+                                        Color(red = 180, green = 180, blue = 189, alpha = 255)
+                )
             ) {
                 Row(
                     modifier = Modifier
@@ -160,9 +165,9 @@ fun NewsScreen(navController: NavHostController) {
                             fontSize = 10.sp,
                             textAlign = TextAlign.End,
                             color = if(isSystemInDarkTheme())
-                                DarkColorScheme.primary
-                            else
-                                LightColorScheme.primary
+                                        DarkColorScheme.primary
+                                    else
+                                        LightColorScheme.primary
                         )
 
                         HorizontalDivider(
@@ -198,7 +203,7 @@ fun NewsScreen(navController: NavHostController) {
                                 color = if(isSystemInDarkTheme())
                                             Color(0xFFADD8E6)
                                         else
-                                            Color(0xFF1FBAEA),
+                                            Color(0xFF24A9EF),
                                 textDecoration = TextDecoration.Underline
                             )
                         )
