@@ -52,7 +52,7 @@ class MainScreenViewModelTest {
         Thread.sleep(1000)
 
         val news = (mainScreenViewModel.uiState.value as NewsUiState.Success).news
-        var ascending: Boolean = true
+        var descending: Boolean = true
         var last = Instant.from(
             DateTimeFormatter.ISO_DATE_TIME.parse(news.articles[0].publishedAt)).toEpochMilli()
 
@@ -60,9 +60,10 @@ class MainScreenViewModelTest {
             if(Instant.from(
                     DateTimeFormatter.ISO_DATE_TIME.parse(
                         news.articles[i].publishedAt)
-                    ).toEpochMilli() < last
+                    ).toEpochMilli() > last
                 ){
-                ascending = false
+                descending = false
+                break
             }
             else{
                 last = Instant.from(
@@ -72,6 +73,6 @@ class MainScreenViewModelTest {
             }
 
         assert(mainScreenViewModel.uiState.value is NewsUiState.Success)
-        assert(ascending)
+        assert(descending)
     }
 }
