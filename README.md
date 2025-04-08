@@ -2,7 +2,6 @@
 
 ## Overview
 This project aims to create an app for displaying news in a friendly way for users.
-At the moment, it just makes a call for the API and render the whole News object on the screen.
 
 This project is using Retrofit2 as the HTTP client from which we would do
 requests to the news API, Koin as dependency injector, Kotlin, Jetpack Compose, MVVM (Model-View-ViewModel) and Clean Architecture.
